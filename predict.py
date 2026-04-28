@@ -103,7 +103,7 @@ class SpecimenData:
         self.crack_growth_index = self.da_dN_current * self.load_cycles_N
         
         if self.tofd_depth_mm is None:
-            self.tofd_depth_mm = self.crack_length_mm + np.random.normal(0, 0.1)
+            self.tofd_depth_mm = self.crack_length_mm + abs(np.random.normal(0, 0.1))
         
         return self
     
