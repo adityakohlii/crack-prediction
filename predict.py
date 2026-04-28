@@ -134,8 +134,9 @@ class SpecimenData:
             "K_murakami": self.K_murakami,
             "da_dN_current": self.da_dN_current,
             "crack_growth_index": self.crack_growth_index,
-            "tofd_depth_m": self.tofd_depth_mm / 1000.0,
+            "tofd_depth_mm": self.tofd_depth_mm,
             "ut_amplitude": self.ut_amplitude,
+            "tofd_t1_us": self.tofd_t1_us,
         }
         return pd.DataFrame([record])
 
