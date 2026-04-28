@@ -17,6 +17,13 @@ with st.sidebar:
     load_cycles = st.number_input("Load Cycles N", value=80000, min_value=100, max_value=5000000, step=1000)
     crack_length = st.number_input("Crack Length (mm)", value=6.0, min_value=0.1, max_value=100.0)
     ut_amplitude = st.slider("UT Amplitude (NDT signal)", min_value=0.0, max_value=1.0, value=0.5, step=0.01)
+
+    st.divider()
+    st.subheader("🔬 Advanced NDT (optional)")
+    tofd_t1 = st.number_input("TOFD t1 (µs)", value=1.5, min_value=0.1, max_value=10.0, step=0.1)
+    tofd_tL = st.number_input("TOFD tL (µs)", value=1.0, min_value=0.1, max_value=10.0, step=0.1)
+    tofd_depth = st.number_input("TOFD Depth (mm) — leave 0 for auto", value=0.0, min_value=0.0, max_value=100.0, step=0.1)
+
     predict_btn = st.button("🔍 Run Prediction", use_container_width=True)
 
 RISK_COLORS = {"SAFE": "green", "LOW": "blue", "MODERATE": "orange", "HIGH": "red", "CRITICAL": "red"}
@@ -34,6 +41,9 @@ if predict_btn:
                 load_cycles_N=int(load_cycles),
                 crack_length_mm=crack_length,
                 ut_amplitude=ut_amplitude,
+                tofd_t1_us=tofd_t1,
+                tofd_tL_us=tofd_tL,
+                tofd_depth_mm=tofd_depth if tofd_depth > 0 else None,  # None = auto-compute
             )
             result = predictor.predict(specimen)
 
